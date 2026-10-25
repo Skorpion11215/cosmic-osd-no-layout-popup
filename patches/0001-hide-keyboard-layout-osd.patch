@@ -1,0 +1,24 @@
+diff --git a/src/components/app.rs b/src/components/app.rs
+index edc50c7..3fddef1 100644
+--- a/src/components/app.rs
++++ b/src/components/app.rs
+@@ -1223,17 +1223,9 @@ impl cosmic::Application for App {
+                 Task::none()
+             }
+             Msg::KeyboardLayout(keyboard_layout::Event::Group(group)) => {
+-                let task = if self.keyboard_layout_group.is_some_and(|g| g != group)
+-                    && let Some(layout) = self.active_layouts.get(group)
+-                {
+-                    self.create_indicator(osd_indicator::Params::KeyboardLayout(
+-                        layout.description.clone(),
+-                    ))
+-                } else {
+-                    Task::none()
+-                };
++                // Сохраняем текущую раскладку без всплывающего индикатора языка.
+                 self.keyboard_layout_group = Some(group);
+-                task
++                Task::none()
+             }
+         }
+     }
